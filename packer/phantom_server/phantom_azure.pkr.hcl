@@ -46,7 +46,7 @@ source "azure-arm" "phantom" {
   os_type = "Linux"
   image_publisher = "openlogic"
   image_offer = "centos"
-  image_sku = "7_9"
+  image_sku = "8_5"
   location = var.azure.location
   vm_size = "Standard_A8_v2"
   use_azure_cli_auth = true
@@ -59,7 +59,7 @@ build {
   ]
 
   provisioner "ansible" {
-    extra_arguments = ["--extra-vars", "${join(" ", [for key, value in var.splunk_server : "${key}=\"${value}\""])} ${join(" ", [for key, value in var.phantom_server : "${key}=\"${value}\""])}"]
+    extra_arguments = ["--extra-vars", "${join(" ", [for key, value in var.splunk_server : "${key}=\"${value}\""])} ${join(" ", [for key, value in var.phantom_server : "${key}=\"${value}\""])} ${join(" ", [for key, value in var.general : "${key}=\"${value}\""])}"]
     playbook_file   = "packer/ansible/phantom_server.yml"
     user            = "centos"
   }

@@ -2,7 +2,7 @@
 # This playbook contains common tasks in this role
 #- include: add_vault_mirrors.yml
 
-- include: resize_disk.yml
+#- include: resize_disk.yml
 
 - include: install_phantom.yml
   when: cloud_provider != "local"
